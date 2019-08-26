@@ -1,0 +1,15 @@
+<strings id="icmon_fr">
+    <string name="game_name">Jeu d'énigme</string>
+    <string name="inspect_eclatrock">Cette pierre semble pouvoir se briser. </string>
+    <string name="use_eclatrock">Allez ! On utilise EclatRock !</string>
+    <string name="use_forcerock">Allez ! On utilise Force !</string>
+    <string name="missing_object">Mais il semble manquer un objet... </string>
+    <string name="inspect_forcerock">Cette pierre semble pouvoir se déplacer. </string>
+    <string name="you_get">Vous avez obtenu : </string>
+    <string name="inspect_signalrock">Cette pierre semble reliée à un signal, peut-être qu'en trouvant comment l'activer on peut la passer</string>
+    <string name="riddle_1">Il parait que si tu as compris le sens de la vie, alors tu pourras passer</string>
+    <string name="riddle_2">On dit qu'il faut savoir ce que l'on cherche pour pouvoir passer...le sais-tu ? Parce que moi pas vraiment...</string>
+    <string name="mew_dialog">Mew...mew, mew mew !</string>
+    <string name=""></string>
+    <string name=""></string>
+</strings>
