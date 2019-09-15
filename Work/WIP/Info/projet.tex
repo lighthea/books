@@ -1,0 +1,276 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[hyphens]{url}
+\lstdefinestyle{custombash}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=bash,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  stringstyle=\color{orange},
+}  
+
+\lstset{escapechar=@,style=custombash}
+\author{Alexandre Sallinen}
+\title{Projet d'analyse de données}
+\begin{document}
+\sloppy
+
+\section{Introduction}
+
+Je ne connais pas ton niveau précis en informatique, étant donné que tu as déjà travaillé avec python pour tes études et peut-être même durant ton stage il est possible que certaines notions te paraissent évidentes. Je ne donnerai pas beaucoup d'explication moi-même parce que le but de ce projet c'est justement que tu apprennes à t'en sortir avec des ressources extérieures.
+\\
+En fait le plus important c'est que tu t'habitue à écrire du python qui manpule des données et à apprendre par toi même. A ce sujet, une compétence importante à avoir c'est de bien savoir manipuler son moteur de navigation (google je suppose) pour rapidement trouver les informations dont tu as besoin. Voila quelques méthodes pour trouver plus facilement des résultats :
+\begin{enumerate}
+\item Ta recherche devrait toujours être faite en anglais (sauf si tu cherches quelque chose de typiquement français) ca te donnera bien plus de résultat.
+
+\item N'écris pas de phrases écris des mots clés, ce n'est pas "Why is tensorflow slow to run" mais "why tensorflow slow". Raccourcis tes phrases au minimum syndical mais fait attention de bien garder les mots importants que tu veux voir apparaitre dans les réponses.
+
+\item Si tu veux qu'un mot apparaisse forcément dans tous tes résultats et de manière exacte, mets le entre guillemets. (why 'tensorflow' slow)
+
+\item Au contraire si tu fais une rechereche ambigüe sur deux deux domaines, élimine celui qui ne te conviens pas avec le '-' (moins) qui permet d'enlever le mot suivant des résultats.
+
+\item Enfin le plus important c'est de noter les mots que l'on veux voir dans la réponse, google est stupide, il ne sait pas répondre à des questions, mais en lui donnant suffisement de mots clés de ta réponse, tu devrais tomber sur quelque chose d'interessant.
+
+\end{enumerate}  
+
+Et finissons par une révélation, macOS c'est une distribution linux avec une cape donc tout ce qui marche sur linux marche "en général" dur mac. Ca devrai déjà t'être utile pour trouver des réponses à tes questions quand personne n'a répondu pour mac spécifiquement.
+
+
+\chapter{Environnement}
+
+\section{Le terminal}
+
+\subsection{Qu'est ce que c'est}
+Le terminal tu doit connaître ça, c'est cette sorte de petite fenetre toute noire ou on peut taper des commandes et revenir à la ligne. Concrètement, ton système d'exploitation n'à pas besoin d'une interface pour fonctionner et un terminal c'est en fait une interface texte pour utiliser macos sans avoir à passer par son interface. En quoi est-ce utile ? Il se ttrouve que toutes les commandes s'écrivent "nom arguments\ldots" donc dans la plupart des cas c'est bien plus court que d'aller se ballader dans une interface, et puis c'est bien connu en info  on est un peu feignants donc t'as deviné pour quelle solution on a opté. 
+\\
+Bon voilà quelques exemples de commandes utiles dont tu vas devoir te servir :
+
+\begin{lstlisting}
+
+git clone https://github.com/utilisateur/depot.git
+
+mkdir Projet
+
+mv ../depot .
+
+./install.sh
+
+rm -rf .
+
+\end{lstlisting}
+
+git, mkdir, mv, rm sont tous des programmes situés dans un endroit de ton ordinateur que tu appelles et qui font des choses pour toi. La première chose que tu dois apprendre c'est donc à te servir d'un terminal de commande, les sections suivantes te diront comment faire.
+Déjà comment lancer le terminal ? Appuie sur cmd+espace et tape terminal et séléctionne l'icone du petit carré noir.
+
+\subsubsection{Naviguer dans les fichiers}
+La première étape c'est de savoir comment naviguer dans les fichiers avec ta ligne de commande. J'entend par la savoir se déplacer dans tes dossiers, en créer de nouveau, savoir les copier les suprimmer\ldots
+Pour cela je te recommande les resources suivantes : 
+\\\\
+\url{<https://www.digitalocean.com/community/tutorials/basic-linux-navigation-and-file-management>} 
+\\\\
+Celui là est un tutoriel détaillé pour naviguer dans tes directories.
+\\\\
+\url{<https://askubuntu.com/questions/232442/how-do-i-navigate-between-directories-in-terminal>}
+\\\\
+celui ci c'est une réponse à une question (ne regarde que la première réponse) elle est pour ubuntu mais comme je t'ai dit c'est pareil sur macOS. Ca t'informera un peu plus sur des particularités du système.
+
+\subsubsection{Executer des programmes}
+La deuxième chose la plus importante sera de savoir executer des commandes (des programmes en fait) et de savoir ce que représente leur arguments...
+\\
+Pour cela retiens simplement que tu devras utiliser la syntaxe suivantes :
+\\
+\textbf{$nomduprogramme$} \textit{$options1, option2, option3$}
+\\
+Maintenant il faut que tu t'habitue à certains programmes qui marchent de cette manière à savoir git et conda. Ils vont former la base de ton environnement.
+Attend un peu je te les présente bientôt.
+
+\section{Git(hub)}
+
+\subsection{Pourquoi utiliser un CVS}
+
+Je te dis d'utiliser git mais pourquoi ? Bah tu admetteras que ce serai plutot sympa quand tu écris du code de pouvoir revenir en arrière autant que tu le veux, et si en plus tu pouvais acceder à ton code depuis n'importe où tu diras pas non. Tout ça c'est le but d'un \textbf{C}entralised \textbf{V}ersion \textbf{C}ontrol. En bref c'est un programme qui se souvient de chaque étapes dans ton code et qui te permet de retourner en arrière, de publier ton code où de collaborer.
+Git est un CVS, c'est pas important de savoir ce qu'il a de spécial.
+Mais alors qu'est ce que github ? github est à git ce que google drive est à tes dossiers. C'est juste un serveur qui se propose de conserver ton "dépot" git pour que tu puisse le téléchager sur un autre ordi et donc travailler de n'importe où avec n'importe qui. 
+
+\subsection{Les bases}
+Il faut que tu comprenne d'abord la logique de travail avec git. Pour cela tu peux lire ces ressources :
+\\\\
+\url{https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/>}
+\\\\
+\url{https://guides.github.com/introduction/git-handbook/}
+\\\\
+Voilà pour git, avant de passer à la suite tu dois être capable de :
+\begin{enumerate}
+\item Créer un repository (dépot)
+\item Ajouter du code et des fichier
+\item Faire un commit
+\item Envoyer tout ça sur un remote sur github
+\end{enumerate}
+
+Pour cela il te faudra un compte sur github aussi.
+Une fois que tu sauras faire tout ça tu seras bon pour utiliser git dans 99\% des cas
+\section{Conda et python}
+\subsection{Pourquoi utiliser conda}
+
+Bon maintenant tu te demandes peut être ce que c'est que conda et pourquoi tu en aurai besoin pour utiliser python. C'est plus simple pour ça de regarder quel problème conda résout : sur python tu peux rapidement télécharger beaucoup de librairies, mais tu vas te rendre compte que il y a certaines librairies que tu n'utiliseras jamais sur le même projet. Alors pourquoi s'embeter à avoir un seul python sur ton ordi avec toutes les librairies alors que tu pourrai avoir un python par catégorie de librairie ? Bah voilà le concept de conda, te permettre de gerer des environnements différents. Et vu que c'est un socle à python même on commence par là ! 
+Bon au passage il se trouve que cpnda sert aussi de package manager à python (comme pip si tu veux) en gros tu peux lui demander de télécharger des librairies et de les installer automatiquement.
+\\ 
+Il ne reste plus qu'à apprendre à s'en servir !
+
+\subsection{Utiliser conda}
+Bon tout d'abord il va falloir installer conda, pour cela suit le tutoriel suivant : 
+\\
+\url{https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html}
+\\
+Il se trouve que ce site c'est celui de la documentation de conda, il est plutot bien fait et t'expliquera tout, mais comme on est au départ du projet je vais encore te donner les liens qui correspondent à chaque étape. Retiens néanmoins que tu seras très souvent confronté à des sites très similaires voir plus arride.
+Bon voici maintenant un tutoriel qui t'explique les bases de conda :
+\url{https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-envs}
+\\
+Je veux qu'avant d'avancer tu saches :
+\begin{enumerate}
+\item Créer un environnement
+\item Ajouter des packets(librairies)
+\item Supprimer des packets
+\item Lister tes librairies installées
+\item Naviguer entre tes environnements
+\end{enumerate}
+ Ca c'est aussi 99\% de ce que tu devras faire avec conda donc maintenant te voilà près à passer au concret.
+\newpage
+\subsection{Préparer l'environnement}
+Tu vas donc maintenant créer un nouvel environnement appelé "datascience" et tu y installera les librairies suivantes :
+ 
+\begin{itemize}
+
+\item pandas
+\item numpy
+\item scipy
+\item matplotlib
+\item openpyxl
+\item tensorflow
+\item keras
+\item requests
+\end{itemize}
+
+Voilà avec ça tu devrais pouvoir réaliser tout le projet normalement.
+Il faut aussi que tu te sentes à l'aise avec les erreurs provoquées par l'absence d'une librairie. Essaye de voir quel message s'affiche si tu ne télécharge pas la librairie et que tu essayes quand même de l'utiliser, histoire que quand ca t'arrivera vraiment tu soit au taquet.
+
+\section{Pycharm}
+\subsection{Intégration avec conda}
+Pycharm fonctionne à merveille avec  conda, quand tu crée un nouveau projet tu as un petit onglet "python interpreter" la choisi "existing interpreter" et tu choisi parmis tes environnements anaconda existants.
+
+\subsubsection{Integration avec Git}
+Là non plus ce n'est pas bien compliqué, tu as un onglet VCS et un sous onglet git qui te permettra d'accéder à toutes les fonctionnalités que tu as utilisées.
+
+\chapter{Projet}
+
+\section{Description du projet}
+
+Le projet consistera à prédire la qualité du vin en fonction de caractéristiques chimique de ce dernier. Pour cela il faudra extraire des données les caractéristiques utiles à la prédiction.
+Le dataset devra être récupéré sur internet, néttoyé et analysé.
+
+\section{Récupération des données}
+
+\subsection{Enoncé du premier projet}
+La première étape va consister en la récupération du set de données sur internet. Alors tout d'abord une rapide définition de set de données pour qu'on soit d'accord :
+\\
+Un set de données est un ensemble de données faisant correspondre les caractéristiques d'un élément à une forme de note. Ton dataset est une sorte de tableaux excel communément constitué de $n$ colonnes dites de "features" (nos caractéristiques) et de $m$ colonnes de "label" qui désignent les notes correspondantes (ces termes sont importants). Chaque colonne représente donc un élément (un vin içi) auquel tu associe des propriétés et une (ou plusieurs) note(s).
+\\
+Par ma définition de dataset tu comprend que la plupart des choses que tu as appris en algèbre linéaire te seront utiles pour exploiter tes données. Mais ça on en discute plus tard.
+En attendant voila l'url de ton dataset :
+\\
+\url{https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data}
+\url{https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.names}
+\\
+Tu remarqueras qu'il y a deux URL, le premier est tes données, le deuxième est un fichier interessant qui te donnera des informations sur les caractéristiques que l'on va étudier.
+Donc sans plus attendre voiçi la description de ta première étape :
+\\
+
+\begin{itemize}
+
+\item Créer un nouveau projet sur pycharm avec toutes les librairies requises précédemment.
+\item Etre capable de télécharger le dataset dans le sous dossier "data" de ton projet (crée le). Je te demanderai évidemment de faire ça avec python et pas à la main.
+\item Faire en sorte quetoutes les fonctionnalités du programme soit séparées en fonctions réutilisable et pas spécialisée (pense que tu voudras réutiliser ces fonctions dans l'année mais avec d'autres valeurs)
+\item Le tout devra être documenté et annoté comme il se doit
+\end{itemize}
+
+Pour faire tout ça il va te falloir un minimum de compréhension du concept de requêtes web et de la librairie requests.
+Pour ce faire la sous section suivante t'y introduira.
+Il faudra évidemment aussi maitriser la gestion des données sur ton disque dur (ouvrir/fermer un fichier, créer uun répertoire\ldots) pour cela utilise le module Pathlib (qui est contenu dans la bibliothèque standard du python donc rien à installer. 
+
+\subsection{Requêtes web}
+Je vais te faire une sorte de micro-cours sur les requêtes web, pour plus de détail je te metterai à disposition des liens à la fin de mon blabla. Et sache que c'est une semaine de ton cours les requêtes et la récupération de données sur internet donc tu t'avance là. 
+\\
+Internet c'est juste énormément d'ordinateurs comme les autres (un peu plus gros mais rien de plus) avec lesquels tu peux parler de manière très basique. En gros il existe que très peu de verbes (5) dans ce language mais il existe une infinité d'objets. Les objets il se trouve que ce sont des pages web, et les verbes décrivent ce que tu veux faire avec (la voir/télécharger, envoyer des donnée comme pour un mot de pass...) En pratique on utilise que ces deux "verbes". Une requête c'est simplement un verbe et un objet. Si tu veux un exemple très concret, quand tu tape sur google la recherche "chat mignon", ce que tu fais vraiment c'est :
+\\\\
+GET (verbe) https://www.google.com/search/chat+mignon (objet) 
+\\\\
+En fait tu demande litéralement de télécharger une page qui a été créée par google. 
+Maintenant pour le concret, GET c'est le "verbe" qui permet de télécharger la page. Donc tu comprend maintenant qu'il te faudrai un moyen d'emmetre une requête GET à l'adresse de ton dataset. Pour se faire il existe la jolie librarie "requests" qui se propose de te permettre de faire ça facilement. Mais avant de plonger dans la librairie, voilà quelques ressources plus formelles sur les requêtes :
+\\\\
+\url{https://learn.onemonth.com/understanding-http-basics/}
+\url{http://www.steves-internet-guide.com/http-basics/}
+\\\\
+Ce protocole de communications c'est ce qu'on appelle le HTTP au fait et c'est ce qui est marqué devant chacune de tes url dans ton navigateur parceque ca indique le protocole à utiliser.
+
+\subsection{Requests}
+C'est donc la librairie qui va te permettre d'emmetre ces requêtes et de télécharger des choses, vu que c'est la librairie que tu utilisera en cours je vais me permettre de simplement te donner le tutoriel présent sur ton cours et la documentation de la librairie pour t'en sortir. Mais ca devrait le faire et c'est surtout très enrichissant. Si tu bloques vraiment inutile de gacher du temps et envoie moi un message.
+\\\\
+\url{https://github.com/epfl-ada-2018/ADA2018-Tutorials/blob/master/06%20-%20Data%20From%20The%20Web/ADA%20Tutorial%20-%20Data%20from%20the%20Web.ipynb}
+\\\\
+\url{https://2.python-requests.org//en/master/user/quickstart/} 
+\\\\
+Le tutoriel de l'EPFL couvre quelque chose de légèrement différent à savoir récupérer des données présentes sous la forme de texte mais déja se srvir de requests pour telecharger quelque chose c'est la première étape. 
+Voila un tutoriel spécifiquement pour télécharger un fichier avec requests :
+\\\\
+\url{https://www.codementor.io/aviaryan/downloading-files-from-urls-in-python-77q3bs0un}
+\\
+\subsection{Dossiers et fichiers}
+Je te fais içi un mini topo sur le système de fichier et la manière de manipuler des dossiers/fichiers.
+\\
+Si tu maitrise bien ce que tu as lu au départ sur la navigation dans les dossiers, il ne te manque plus qu'à connaitre comment réaliser les differentes actions que tu connais.
+Ainsi, si tu souhaite créer un nouveau dossier tu vas devoir utiliser la fonction \textit{os.makedirs}, pour créer un fichier, ouvre le avec la fonction \textit{open}, sinon de manière genérale les objets de type Path \textit{(pathlib.Path)} offre de nombreuses méthodes très pratiques pour la manipulation des chemins de fichiers (extraire le nom du fichier dedpuis un chemin, passer de chemin relatif à chemin absolu, verifier si le chemin existe, si c'est un fichier, un dossier\ldots). 
+
+\section{Préanlayse des données}
+
+\subsection{Objectifs}
+
+C'est maintenant que commencent les choses plus amusantes. Il va s'agir de la phase la plus importante du projet, en effet, les performances de tes modèles de machine learning dépendent dirèctement de cette phase. Voiçi donc les objectifs de cette section :
+\begin{itemize}
+\item Maitriser les différents mécanismes de nettoyage des donées.
+\item Maitriser les techniques de préparations des données en vue d'une analyse plus poussée.
+\item Maitriser la génération de graphiques utiles à la compréhension des liens entre les données.
+\end{itemize}
+
+\subsection{Charger les données}
+Après avoir télécharger et enregistré tes fichiers, tu devras recharger les données en mémoire, évidemment, si tu lance ton programme pour la deuxième fois il semble logique de mettre en place un mecanisme sautant la première partie. 
+\\\\
+Maintenant il s'agit de savoir comment charger ces données. Il va te falloir ouvrir le fichier, le traverser, et construire un \textit{dictionnaire de listes} de cette forme :
+Tu donnera une entrée dans le dictiionnaire pour chaque colonne de tes données (pense a une feuille excel). Puis dans chaque entrée tu créera une liste (tes lignes) qui accumulera les valeurs correspondantes ligne après lignes. Je reste volontairement flou parce que je veux que tu regqrdes à quoi ressemblent les données et que tu trouves toi même un moyen de construire cette structure. Une fois que ce sera fait tu vas pouvoir construire uneDataframe  \textit{(pandas.Dataframe)} à partir de ces données. Une dataframe permet de manipuler de manière bien plus puissante les données que tu viens d'extraire. Pour construire une Dataframe à partir d'un dictionnaire il faut utiliser la méthode \textit{fromdict} de pandas. 
+
+\subsection{Vérification des fichiers}
+
+
+Une chose importante à retenir c'est que les fonctions sont concues pour un type de variables très précis, si une valeur n'a pas le type attendu, tout explose en général. En python, c'est compliqué d'arriver à cette situation sauf quand tu télécharge des données comme ça, en effet il se pourrait qu'une case soit vide, pas dans le sens 0, dans le sens absolument vide, ou juste invalide. Heureusement, pandas te permet de vérifier tout ça et plus encore. Pour travailler avec ces valeurs embêtantes je te renvois à cet article :
+\\\\
+\url{https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html}
+\\\\
+Une fois que tu aura réglé cela tu vas pouvoir commencer la vraie préanalyse.
+
+\subsection{Un premier regard}
+Il s'agit dans cette étape de te familiariser avec les données et de comprendre comment elle pourraient être liées et à quoi as tu vraiment à faire. Pour cela une première toute petite étape serait de vérifier les dimensions de tes données \textit{(pandas.Dataframe.shape)} cette méthode de ta dataframe te permettra donc de connaitre le nombre de colonnes et de lignes qu'elle possède. Ensuite tu peux porter un premier regard avec la méthode \textit{head} de Dataframe qui te montreras les premières lignes. Enfin, \textit{describe} t'offrira des valeurs utiles sur la répartition des valeurs de chaque colonne.
+Je te conseille de regrouper toutes ces informations dans une fonction pour la faire tourner à chaque fois.
+  
+
+
+
+
+\end{document}

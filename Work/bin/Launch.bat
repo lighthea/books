@@ -1,1 +1,0 @@
-java ch.epfl.cs107.play.Play -Xms4196m -Xmx4196m
